@@ -8,7 +8,6 @@ class GroceryListContainer extends Component {
   }
 
   render() {
-    debugger
     let groceries = this.props.groceryList.map((grocery) => {
       let id = grocery.id
       let name = grocery.name

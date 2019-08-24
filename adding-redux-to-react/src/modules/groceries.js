@@ -20,7 +20,6 @@ const groceries = (state = initialState, action)=>{
 const ADD_GROCERY = 'ADD_GROCERY'
 
 const addNewGrocery = grocery =>{
-  debugger
   return {
     type: ADD_GROCERY,
     grocery
