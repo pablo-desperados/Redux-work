@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { groceries } from '../modules/groceries'
+import { addNewGrocery, clearForm, groceries, handleNameChange } from '../modules/groceries'
 
 const rootReducer = combineReducers({
   groceries

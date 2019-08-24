@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
 import Grocery from '../components/Grocery'
 
 class GroceryListContainer extends Component {
@@ -8,7 +8,8 @@ class GroceryListContainer extends Component {
   }
 
   render() {
-    let groceries = this.props.groceries.map((grocery) => {
+    debugger
+    let groceries = this.props.groceryList.map((grocery) => {
       let id = grocery.id
       let name = grocery.name
 
@@ -28,4 +29,13 @@ class GroceryListContainer extends Component {
   }
 }
 
-export default GroceryListContainer
+const mapStateToProps = (state) => {
+  return {
+    groceryList: state.groceries.groceryList
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(GroceryListContainer)
