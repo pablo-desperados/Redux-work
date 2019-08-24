@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import { clearForm, handleNameChange, addNewGrocery } from '../modules/groceries'
 import GroceryInputField from '../components/GroceryInputField'
 
 class GroceryFormContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: ''
-    }
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.handleNameChange = this.handleNameChange.bind(this)
-    this.clearForm = this.clearForm.bind(this)
   }
 
   // Below function calculates id of next item in place of a database
@@ -30,29 +26,20 @@ class GroceryFormContainer extends Component {
 
     const newGrocery = {
       id: newId,
-      name: this.state.name
+      name: this.props.name
     }
 
     this.props.addNewGrocery(newGrocery)
 
-    this.clearForm()
-  }
-
-  handleNameChange(event) {
-    const newName = event.target.value
-    this.setState({ name: newName })
-  }
-
-  clearForm() {
-    this.setState({ name: '' })
+    this.props.clearForm()
   }
 
   render() {
     return(
       <form onSubmit={this.handleFormSubmit}>
         <GroceryInputField
-          handleChange={this.handleNameChange}
-          name={this.state.name}
+          handleChange={this.props.handleNameChange}
+          name={this.props.name}
         />
         <input type="submit" value="Add To List" />
       </form>
@@ -60,4 +47,19 @@ class GroceryFormContainer extends Component {
   }
 }
 
-export default GroceryFormContainer
+const mapStateToProps =(state)=>{
+    return{
+      name: state.groceries.name,
+      groceryList: state.groceries.groceryList
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    handleNameChange: (event) =>  dispatch(handleNameChange(event)) ,
+    clearForm: () => dispatch(clearForm()),
+    addNewGrocery: (grocery)=> dispatch(addNewGrocery(grocery))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(GroceryFormContainer)
