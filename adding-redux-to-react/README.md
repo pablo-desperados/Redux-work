@@ -13,3 +13,7 @@ If you run into any problems, especifically with the ```node-sass``` module bein
 npm install
 npm install node-sass
 ```
+# Why I made this
+This is my first time using Redux inside a React App. I created a Store, a middleware function, and the neccesary setup to use Redux independently on the different React components.
+
+I this app Redux is being injected into the components to avoid passing props from the parent component to it's children.
